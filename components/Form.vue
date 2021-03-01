@@ -6,12 +6,26 @@
       <div class="form-row">
         <div class="form-group">
           <label for="exampleInputEmail1">Email address<sup>*</sup></label>
-          <input v-model="form.email.value" type="email" class="form-control" :class="{'_error': !form.email.state}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <input
+            v-model="form.email.value"
+            type="email" class="form-control"
+            :class="{'_error': !form.email.state}"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            @input="input(`email`, $event.target.value)">
           <small v-if="!form.email.state" class="form-text _error">Please, fill the field</small>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Password<sup>*</sup></label>
-          <input v-model="form.password.value" type="password" class="form-control" :class="{'_error': !form.password.state}" id="exampleInputPassword1" placeholder="Password">
+          <input
+            v-model="form.password.value"
+            type="password"
+            class="form-control"
+            :class="{'_error': !form.password.state}"
+            id="exampleInputPassword1"
+            placeholder="Password"
+            @input="input(`password`, $event.target.value)">
           <small v-if="!form.password.state" class="form-text _error">Please, fill the field</small>
         </div>
       </div>
@@ -19,12 +33,24 @@
       <div class="form-row">
         <div class="form-group">
           <label for="exampleGrowth">Growth<sup>*</sup></label>
-          <input v-model="form.growth.value" type="number" class="form-control" :class="{'_error': !form.growth.state}" id="exampleGrowth">
+          <input
+            v-model="form.growth.value"
+            type="number"
+            class="form-control"
+            :class="{'_error': !form.growth.state}"
+            id="exampleGrowth"
+            @input="input(`growth`, $event.target.value)">
           <small v-if="!form.growth.state" class="form-text _error">Please, fill the field</small>
         </div>
         <div class="form-group">
           <label for="dateOfBirth">Date of Birth<sup>*</sup></label>
-          <input v-model="form.dateOfBirth.value" type="date" class="form-control" :class="{'_error': !form.dateOfBirth.state}" id="dateOfBirth">
+          <input
+            v-model="form.dateOfBirth.value"
+            type="date"
+            class="form-control"
+            :class="{'_error': !form.dateOfBirth.state}"
+            id="dateOfBirth"
+            @input="input(`dateOfBirth`, $event.target.value)">
           <small v-if="!form.dateOfBirth.state" class="form-text _error">Please, fill the field</small>
         </div>
       </div>
@@ -81,8 +107,12 @@ export default {
         this.formSubmitted = formState;
       }
     },
+    input(type, value) {
+      this.form[type].state = !!value;
+    },
     onChangePhoto(evt) {
       this.form.photo.value = evt.returnValue;
+      this.form.photo.state = !!this.form.photo.value;
     }
   }
 }
